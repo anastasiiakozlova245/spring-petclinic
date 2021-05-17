@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
-  <version>2.4.2</version>
+  <version>3.0.0-SNAPSHOT</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -344,7 +342,7 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore/>
+                        <ignore />
                       </action>
                     </pluginExecution>
                     <pluginExecution>
@@ -357,7 +355,7 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore/>
+                        <ignore />
                       </action>
                     </pluginExecution>
                   </pluginExecutions>
@@ -369,5 +367,12 @@
       </build>
     </profile>
   </profiles>
-
+  
+  <scm>
+    <connection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</connection>
+    <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
+  </scm>
+  
 </project>
