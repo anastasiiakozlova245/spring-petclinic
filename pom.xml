@@ -292,7 +292,16 @@
       </snapshots>
     </repository>
   </repositories>
-
+  
+  <distributionManagement>
+    <repository>
+      <id>deploy</id>
+      <layout>default</layout>
+      <name>spring-petclinic</name>
+      <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
+    </repository>
+  </distributionManagement>
+  
   <pluginRepositories>
     <pluginRepository>
       <id>spring-snapshots</id>
