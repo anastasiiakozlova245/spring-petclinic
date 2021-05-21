@@ -292,16 +292,20 @@
       </snapshots>
     </repository>
   </repositories>
-  
-  <distributionManagement>
+
+   <distributionManagement>
     <repository>
-      <id>deploy</id>
-      <layout>default</layout>
-      <name>spring-petclinic</name>
-      <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
+      <id>nexus</id>
+      <name>maven-releases</name>
+      <url>http://nexus:8081/repository/maven-releases/</url>
     </repository>
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>maven-snapshots</name>
+      <url>http://nexus:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
-  
+
   <pluginRepositories>
     <pluginRepository>
       <id>spring-snapshots</id>
@@ -376,12 +380,12 @@
       </build>
     </profile>
   </profiles>
-  
+
   <scm>
     <connection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</connection>
     <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
   </scm>
-  
+
 </project>
