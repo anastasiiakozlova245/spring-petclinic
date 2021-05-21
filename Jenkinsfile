@@ -1,11 +1,14 @@
 pipeline{
     agent any
+    environment {
+    dockerImage
+    }
     stages {
         stage("build") {
             steps {
                 echo 'building a maven image'
                 script {
-                def dockerImage = docker.build("petclinic-snapshot:$env.BUILD_NUMBER")
+                dockerImage = docker.build petclinic-snapshot:$env.BUILD_NUMBER
                 }
             }
         }
