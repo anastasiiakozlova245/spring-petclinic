@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-    dockerImage
+    dockerImage=''
     }
     stages {
         stage("build") {
