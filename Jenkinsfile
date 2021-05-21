@@ -8,7 +8,7 @@ pipeline{
             steps {
                 echo 'building a maven image'
                 script {
-                dockerImage = docker.build petclinic-snapshot:$env.BUILD_NUMBER
+                dockerImage = docker.build("petclinic-snapshot:$env.BUILD_NUMBER")
                 }
             }
         }
