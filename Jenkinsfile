@@ -6,13 +6,10 @@ pipeline{
     stages {
         stage("build") {
             steps {
-                echo 'building a jar file'
+		echo 'building a maven image'
                 script {
-                jarFile = docker.image('maven:3.8.1-openjdk-8').inside() {
-                    sh 'mvn clean package'
+                	dockerImage = docker.build("petclinic-snapshot:$env.BUILD_NUMBER")
                 }
-                }
-            }
         }
         stage("push") {
             steps {
