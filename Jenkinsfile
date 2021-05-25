@@ -10,6 +10,7 @@ pipeline{
                 script {
                 	dockerImage = docker.build("petclinic-snapshot:$env.BUILD_NUMBER")
                 }
+	    }
         }
         stage("push") {
             steps {
