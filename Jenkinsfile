@@ -1,14 +1,16 @@
 pipeline{
     agent any
     environment {
-    dockerImage=''
+    jarFile=''
     }
     stages {
         stage("build") {
             steps {
-                echo 'building a maven image'
+                echo 'building a jar file'
                 script {
-                dockerImage = docker.build("petclinic-snapshot:$env.BUILD_NUMBER")
+                jarFile = docker.image(maven:3.8.1-openjdk-8).inside() {
+                    sh 'mvn clean package'
+                }
                 }
             }
         }
