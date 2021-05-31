@@ -54,12 +54,12 @@ pipeline{
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
-                            ]
 
                             [artifactId: pom.artifactId,
                                 classifier: '',
                                 file: "pom.xml",
                                 type: "pom"]
+                            ]
                         );
 
                     } else {
