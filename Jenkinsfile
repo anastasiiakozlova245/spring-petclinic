@@ -17,7 +17,7 @@ pipeline{
                         echo 'building a jar file'
                         script {
                             jarFile = docker.image('maven:3.8.1-openjdk-8').inside('--network jenkins') {
-                                sh 'mvn clean package'
+                                sh 'mvn -s $MAVEN_SETTINGS clean package'
                             }
                         }
                 }
