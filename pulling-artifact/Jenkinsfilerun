@@ -21,8 +21,8 @@ pipeline{
             steps {
                 echo 'running the application'
                 script {
-                    docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080",
-                        'sleep 60 && echo hello'
+                    docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080 -v /var/jenkins_home/workspace/petclinic-run@2:/opt",
+                        'java -jar /opt/*.jar'
                     ])
                 }
             }
