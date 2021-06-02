@@ -8,13 +8,21 @@ pipeline{
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
     }
     stages {
-        stage("build") {
+        stage("pull jar") {
             steps {
-                echo 'pulling and running'
+                echo 'pulling jar file'
                 script {
-                    docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080",
-                        'curl -o petclinic.jar -L -X GET "http://nexus:8081/service/rest/v1/search/assets/download?sort=version&repository=maven-snapshots&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.extension=jar" \
-                        && java -jar *.jar'
+                    sh 'curl -o petclinic.jar -L -X GET "http://nexus:8081/service/rest/v1/search/assets/download?sort=version&repository=maven-snapshots&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.extension=jar" '
+
+                }
+            }
+        }
+        stage("run the application") {
+            steps {
+                echo 'running the application'
+                script {
+                    docker.image('maven:3.8.1-openjdk-8').withRun(["--network jenkins -p 8082:8080",
+                        'java -jar *.jar'
                     ])
                 }
             }
