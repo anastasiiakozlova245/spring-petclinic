@@ -22,7 +22,7 @@ pipeline{
                 echo 'running the application'
                 script {
                     docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080 -v /Users/akozlova/intro_to_devops/jenkins/data/workspace/petclinic-run@2:/opt -w /opt",
-                        'sleep 1000'
+                        'java -jar /opt/*.jar'
                     ])
                 }
             }
