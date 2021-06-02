@@ -22,7 +22,7 @@ pipeline{
                 echo 'running the application'
                 script {
                     docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080",
-                        'java -jar *.jar'
+                        'sleep 60'
                     ])
                 }
             }
