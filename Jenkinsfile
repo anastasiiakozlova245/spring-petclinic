@@ -1,12 +1,8 @@
 pipeline{
     agent any
-    environment {
-        dockerImage=''
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "nexus:8081"
-        NEXUS_REPOSITORY = "maven-snapshots"
-        NEXUS_CREDENTIAL_ID = "nexus-credentials"
+    tools {
+        maven 'maven3.8.1'
+        jdk 'jdk8'
     }
     stages {
         stage("build a jar") {
