@@ -27,7 +27,9 @@ pipeline{
         }
         stage("run") {
             steps {
-                docker.image('anastasiiakozlova/petclinic:jenkins').run(['--network jenkins -p 8082:8080'])
+                script {
+                    docker.image('anastasiiakozlova/petclinic:jenkins').run(['--network jenkins -p 8082:8080'])
+                }
             }
         }
         stage("push") {
