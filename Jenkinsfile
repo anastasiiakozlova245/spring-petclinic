@@ -17,7 +17,7 @@ pipeline{
             steps {
                 echo 'building a docker image'
                 script {
-                    docker.withRegistry("anastasiiakozlova/petclinic", docker-credentials) {
+                    docker.withRegistry("anastasiiakozlova/petclinic", 'docker-credentials') {
                         def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
                         dockerImage.push()
                     }
