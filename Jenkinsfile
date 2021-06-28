@@ -27,9 +27,7 @@ pipeline{
         }
         stage("run") {
             steps {
-                docker.image("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}").run(["--network jenkins -p 8082:8080",
-                    'java -jar *.jar'
-                ])
+                docker.image("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}").run(['--network jenkins -p 8082:8080'])
             }
         }
         stage("push") {
