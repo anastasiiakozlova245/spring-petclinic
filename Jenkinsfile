@@ -18,6 +18,7 @@ pipeline{
                 echo 'building a docker image'
                 script {
                     def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
+                    dockerImage.push()
                 }
             }
         }
@@ -25,14 +26,6 @@ pipeline{
             steps {
                 script {
                     docker.image('anastasiiakozlova/petclinic:jenkins').run(['--network jenkins -p 8082:8080'])
-                }
-            }
-        }
-        stage("push") {
-            steps {
-                echo 'pushing the docker image file to DockerHub'
-                script {
-                    dockerImage.push()
                 }
             }
         }
