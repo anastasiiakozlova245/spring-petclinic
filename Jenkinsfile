@@ -16,9 +16,13 @@ pipeline{
         stage("build") {
             steps {
                 echo 'building a docker image'
-                script {
-                    def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
-                    dockerImage.push()
+                withCredentials([
+                    file(credentialsId: 'docker-credentials')
+                ]) {
+                    script {
+                        def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
+                        dockerImage.push()
+                    }
                 }
             }
         }
