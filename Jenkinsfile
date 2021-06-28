@@ -27,7 +27,8 @@ pipeline{
         }
         stage("run") {
             steps {
-                docker.image("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}").inside("--network jenkins -p 8082:8080")
+                docker.image("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}").run(["--network jenkins -p 8082:8080"
+                ])
             }
         }
         stage("push") {
