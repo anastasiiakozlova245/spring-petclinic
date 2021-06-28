@@ -21,13 +21,13 @@ pipeline{
             steps {
                 echo 'building a docker image'
                 script {
-                    def dockerImage = docker.build("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}")
+                    def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
                 }
             }
         }
         stage("run") {
             steps {
-                docker.image("anastasiiakozlova/petclinic:${env.BUILD_NUMBER}").run(['--network jenkins -p 8082:8080'])
+                docker.image('anastasiiakozlova/petclinic:jenkins').run(['--network jenkins -p 8082:8080'])
             }
         }
         stage("push") {
