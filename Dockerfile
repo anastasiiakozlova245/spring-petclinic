@@ -1,14 +1,7 @@
 FROM maven:3.8.1-openjdk-8
-RUN mkdir -p /root/.m2 && mkdir /root/.m2/repository
-# Copy maven settings, containing repository configurations
-COPY settings.xml /root/.m2
-COPY .mvn /home/app
-COPY mvnw /home/app/mvnw
-COPY mvnw.cmd /home/app
-COPY pom.xml /home/app
-COPY src /home/app/src
-COPY release.properties /home/app
 WORKDIR /home/app
-RUN ["mvn","clean","package"]
-CMD ["java","-jar","target/*.jar"]
-
+COPY ./target/*.jar /home/app
+EXPOSE 8080
+#RUN whoami
+#RUN ["chmod","+x","spring-petclinic-3.0.2-SNAPSHOT.jar"]
+CMD ["java","-jar","./spring-petclinic-3.0.2-SNAPSHOT.jar"]
