@@ -17,7 +17,7 @@ pipeline{
             steps {
                 echo 'building a docker image'
                 withCredentials([
-                    usernamePassword(credentialsId: 'docker-credentials')
+                    usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')
                 ]) {
                     script {
                         def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
