@@ -1,5 +1,10 @@
 pipeline{
     agent any
+    environment {
+        dockerImage = ''
+        credentialsID = 'docker-credentials'
+        registry = 'anastasiiakozlova/petclinic'
+    }
     tools {
         maven 'maven3.8.1'
         jdk 'jdk8'
@@ -17,8 +22,14 @@ pipeline{
             steps {
                 echo 'building a docker image'
                 script {
-                    docker.withRegistry("anastasiiakozlova/petclinic", "docker-credentials") {
-                        def dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
+                    dockerImage = docker.build("anastasiiakozlova/petclinic:jenkins")
+                }
+            }
+        }
+        stage("push") {
+            steps {
+                script {
+                    docker.withRegistry('', credentialsID) {
                         dockerImage.push()
                     }
                 }
