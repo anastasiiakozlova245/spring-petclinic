@@ -9,7 +9,7 @@ pipeline{
             steps {
                 echo 'building a jar file'
                 withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
-                    sh 'mvn clean package'
+                    sh 'mvn -s 'settings.xml' clean package'
                 }
             }
         }
