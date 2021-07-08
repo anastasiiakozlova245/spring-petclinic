@@ -8,8 +8,8 @@ pipeline{
         stage("build") {
             steps {
                 echo 'building a jar file'
-                withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
-                    sh 'mvn -s "settings.xml" clean package'
+                withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1', variable: 'MAVEN_SETTINGS') {
+                    sh 'mvn -s $MAVEN_SETTINGS clean package'
                 }
             }
         }
