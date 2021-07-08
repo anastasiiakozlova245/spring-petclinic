@@ -11,8 +11,10 @@ pipeline{
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo 'building a jar file'
-                    withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
-                        sh 'mvn -s $MAVEN_SETTINGS clean package'
+                    script {
+                        jarFile = docker.image('maven:3.8.1-openjdk-8').inside('--network capstone_project') {
+                            sh 'mvn -s $MAVEN_SETTINGS clean package'
+                        }
                     }
                 }
             }
