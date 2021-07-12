@@ -305,12 +305,12 @@
     <repository>
       <id>nexus</id>
       <name>maven-releases</name>
-      <url>http://nexus-CP:8084/repository/petclinic-releases/</url>
+      <url>http://nexus-CP:8081/repository/petclinic-releases/</url>
     </repository>
     <snapshotRepository>
       <id>nexus</id>
       <name>maven-snapshots</name>
-      <url>http://nexus-CP:8084/repository/petclinic-snapshots/</url>
+      <url>http://nexus-CP:8081/repository/petclinic-snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -392,7 +392,7 @@
   <scm>
     <connection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</connection>
     <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</developerConnection>
-    <tag>HEAD</tag>
+    <tag>petclinic</tag>
     <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
   </scm>
 
