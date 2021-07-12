@@ -20,7 +20,9 @@ pipeline{
                 ]) {
                     echo 'building a jar file'
                     withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
-                        jarFile = sh 'mvn -s $MAVEN_SETTINGS clean package'
+                        script{
+                            jarFile = sh 'mvn -s $MAVEN_SETTINGS clean package'
+                        }
                     }
                 }
             }
@@ -70,6 +72,6 @@ pipeline{
                 }
             }
         }
-        
+
     }
 }
