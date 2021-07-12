@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-        dockerImage = docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}")
+        petclinicImage = docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}")
         credentialsID = 'docker-credentials'
         registry = 'anastasiiakozlova/petclinic-snapshot'
     }
@@ -10,7 +10,7 @@ pipeline{
             steps {
                 script {
                     docker.withRegistry('', credentialsID) {
-                        docker.image('anastasiiakozlova/petclinic-snapshot:${artifact_version}').run(['--network jenkins -p 8082:8080'])
+                        docker.image(petclinicImage).run(['--network jenkins -p 8082:8080'])
                     }
                 }
             }
