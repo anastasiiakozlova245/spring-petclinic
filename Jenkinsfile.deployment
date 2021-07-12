@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    environment {
+        dockerImage = "anastasiiakozlova/petclinic-snapshot:${artifact_version}"
+        credentialsID = 'docker-credentials'
+        registry = 'anastasiiakozlova/petclinic-snapshot'
+    }
+    stages {
+        stage("pull docker image") {
+            steps {
+                script {
+                    docker.withRegistry('', credentialsID) {
+                        dockerImage.pull()
+                    }
+                }
+            }
+        }
+        stage("run") {
+            steps {
+                script {
+                    docker.image('anastasiiakozlova/petclinic-snapshot:${artifact_version}').run(['--network jenkins -p 8082:8080'])
+                }
+            }
+        }
+    }
+}

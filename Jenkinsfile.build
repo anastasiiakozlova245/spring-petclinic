@@ -90,5 +90,8 @@ pipeline{
                 }
             }
         }
+        stage ('trigger deployment job') {
+            build job: 'Deployment-Petclinic', parameters: [string(name: 'artifact_version',  value: "${pom.version}")]
+        }
     }
 }
