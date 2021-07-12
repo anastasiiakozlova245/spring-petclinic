@@ -10,7 +10,7 @@ pipeline{
             steps {
                 script {
                     docker.withRegistry('', credentialsID) {
-                        docker.image(petclinicImage).run(['--network jenkins -p 8082:8080'])
+                        docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}").run(['--network jenkins -p 8082:8080'])
                     }
                 }
             }
