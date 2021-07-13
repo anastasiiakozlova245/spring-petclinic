@@ -4,4 +4,4 @@ COPY ./target /home/app/target
 EXPOSE 8080
 USER root
 #CMD ["sleep","100"]
-CMD ["java","-jar","/home/app/target/*.jar"]
+CMD ["bash","-c","java","-jar","/home/app/target/*.jar"]
