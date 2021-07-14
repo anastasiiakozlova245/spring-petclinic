@@ -15,13 +15,14 @@ pipeline{
     }
     stages {
         stage("release version") {
-            steps{
-                input {
-                    message 'Please provide the release version'
-                    parameters {
-                        string defaultValue: '1.0', description: '', name: 'release_version', trim: true
-                    }
+            input {
+                message 'Please provide the release version'
+                parameters {
+                    string(defaultValue: '1.0', description: '', name: 'release_version', trim: true)
                 }
+            }
+            steps{
+                echo "performing the release ${release_version}"
             }
         }
         stage("release perform") {
