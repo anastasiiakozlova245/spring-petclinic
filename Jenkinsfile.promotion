@@ -4,12 +4,6 @@ pipeline{
         maven 'maven3.8.1'
         jdk 'jdk8'
     }
-    input {
-        message 'Please provide the release version'
-        parameters {
-            string defaultValue: '1.0', description: '', name: 'release_version', trim: true
-        }
-    }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
@@ -17,8 +11,17 @@ pipeline{
         NEXUS_REPOSITORY = "petclinic-releases"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
         pom = ''
+        release_version = ''
     }
     stages {
+        stage("release version") {
+            input {
+                message 'Please provide the release version'
+                parameters {
+                    string defaultValue: '1.0', description: '', name: 'release_version', trim: true
+                }
+            }
+        }
         stage("release perform") {
             steps {
                 withCredentials([
