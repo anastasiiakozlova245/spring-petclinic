@@ -28,6 +28,9 @@
     <jacoco.version>0.8.5</jacoco.version>
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.25</spring-format.version>
+
+    <project.scm.id>petclinic</project.scm.id>
+
   </properties>
 
   <dependencies>
@@ -304,12 +307,12 @@
    <distributionManagement>
     <repository>
       <id>nexus</id>
-      <name>maven-releases</name>
+      <name>petclinic-releases</name>
       <url>http://nexus-CP:8081/repository/petclinic-releases/</url>
     </repository>
     <snapshotRepository>
       <id>nexus</id>
-      <name>maven-snapshots</name>
+      <name>petclinic-snapshots</name>
       <url>http://nexus-CP:8081/repository/petclinic-snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
@@ -383,6 +386,14 @@
                 </lifecycleMappingMetadata>
               </configuration>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-scm-plugin</artifactId>
+              <version>1.11.2</version>
+              <configuration>
+                <connectionType>developerConnection</connectionType>
+              </configuration>
+            </plugin>
           </plugins>
         </pluginManagement>
       </build>
@@ -390,9 +401,8 @@
   </profiles>
 
   <scm>
-    <connection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</connection>
     <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</developerConnection>
-    <tag>petclinic</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
   </scm>
 
