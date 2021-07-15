@@ -10,8 +10,9 @@ pipeline{
             steps {
                 script {
                     echo "${artifact_version}"
+                    sh 'docker rm -f petclinic'
                     docker.withRegistry('', credentialsID) {
-                        docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}").run(['--network jenkins -p 80:8080'])
+                        docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}").run(['--name petclinic --network jenkins -p 80:8080'])
                     }
                 }
             }
