@@ -9,7 +9,7 @@ pipeline{
         stage("run petclinic") {
             steps {
                 script {
-                    echo "${artifact_version}"
+                    echo "Running ${artifact_version} version of spring-petclinic"
                     sh 'docker rm -f petclinic'
                     docker.withRegistry('', credentialsID) {
                         docker.image("anastasiiakozlova/petclinic-snapshot:${artifact_version}").run(['--name petclinic --network jenkins -p 80:8080'])

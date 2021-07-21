@@ -18,7 +18,7 @@ pipeline{
             input {
                 message 'Please provide the release version'
                 parameters {
-                    string(defaultValue: '1.0', description: '', name: 'release_version', trim: true)
+                    string(defaultValue: '3.0.4', description: '', name: 'release_version', trim: true)
                 }
             }
             steps{
@@ -32,53 +32,8 @@ pipeline{
                 ]) {
                     echo 'building a jar file'
                     withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
-
+                        sh 'mvn -s $MAVEN_SETTINGS -B release:prepare'
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
-                    }
-                }
-            }
-        }
-        stage("push to nexus") {
-            steps {
-                echo 'pushing the jar file to nexus'
-                script {
-                    // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
-                    pom = readMavenPom file: "pom.xml";
-                    // Find built artifact under target folder
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    // Print some info from the artifact found
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    // Extract the path from the File found
-                    artifactPath = filesByGlob[0].path;
-                    // Assign to a boolean response verifying If the artifact name exists
-                    artifactExists = fileExists artifactPath;
-
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-
-                            [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
                     }
                 }
             }
@@ -96,6 +51,7 @@ pipeline{
             steps {
                 echo 'running the application'
                 script {
+                    sh 'docker rm -f petclinic'
                     docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080 -v /Users/akozlova/intro_to_devops/jenkins/data-cp/workspace/Promotion-Petclinic:/opt -w /opt",
                         'java -jar *.jar'
                     ])
