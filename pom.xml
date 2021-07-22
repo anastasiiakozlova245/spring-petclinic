@@ -408,7 +408,7 @@
   <scm>
     <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic</developerConnection>
     <tag>release</tag>
-    <url>https://github.com/anastasiiakozlova245/spring-petclinic</url>
+    <url>https://github.com/anastasiiakozlova245/spring-petclinic/tree/dev</url>
   </scm>
 
 </project>
