@@ -32,6 +32,8 @@ pipeline{
                 ]) {
                     echo 'building a jar file'
                     withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
+                        sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
+                        sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'mvn -B release:prepare'
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
