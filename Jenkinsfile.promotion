@@ -34,7 +34,7 @@ pipeline{
                         sh 'git pull'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare'
                         sh 'git checkout dev'
-                        sh 'mvn -s $MAVEN_SETTINGS release:perform'
+                        sh 'mvn -s $MAVEN_SETTINGS release:perform -DbranchName=dev'
                     }
                 }
             }
