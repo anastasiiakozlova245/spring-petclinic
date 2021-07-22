@@ -14,7 +14,7 @@ pipeline{
         release_version = ''
     }
     stages {
-        stage("release version") {
+        stage("release") {
             input {
                 message 'Please provide the release version'
                 parameters {
@@ -23,10 +23,6 @@ pipeline{
             }
             steps{
                 echo "performing the release ${release_version}"
-            }
-        }
-        stage("release perform") {
-            steps {
                 withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
