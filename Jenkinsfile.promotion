@@ -31,7 +31,7 @@ pipeline{
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo 'building a jar file'
-                    withMaven(globalMavenSettingsConfig: '6a3beec4-d96b-4dc2-bce4-3a99e38b57c1') {
+                    script {
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh "git tag -d spring-petclinic-${release_version}"
