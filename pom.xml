@@ -406,7 +406,7 @@
   </profiles>
 
   <scm>
-    <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic/tree/dev</developerConnection>
+    <developerConnection>scm:git:https://github.com/anastasiiakozlova245/spring-petclinic.git</developerConnection>
     <tag>release</tag>
     <url>https://github.com/anastasiiakozlova245/spring-petclinic/tree/dev</url>
   </scm>
