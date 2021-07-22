@@ -30,7 +30,6 @@ pipeline{
                     script {
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
-                        #sh "git tag -d spring-petclinic-${release_version}"
                         sh 'git checkout dev'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare'
                         sh 'git checkout dev'
