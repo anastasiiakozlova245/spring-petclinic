@@ -33,6 +33,7 @@ pipeline{
                         sh "git tag -d spring-petclinic-${release_version}"
                         sh 'git checkout dev'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare'
+                        sh 'git checkout dev'
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
                 }
