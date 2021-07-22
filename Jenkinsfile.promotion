@@ -34,7 +34,7 @@ pipeline{
                         sh 'git pull'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare'
                         sh 'git checkout dev'
-                        sh 'mvn release:perform -DconnectionUrl=https://github.com/anastasiiakozlova245/spring-petclinic/tree/dev'
+                        sh 'mvn release:perform'
                     }
                 }
             }
