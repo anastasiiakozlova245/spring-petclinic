@@ -32,7 +32,7 @@ pipeline{
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
                         sh 'git pull'
-                        sh 'mvn -s $MAVEN_SETTINGS -B release:prepare -DbranchName=dev -Dresume=false'
+                        sh 'mvn -B release:prepare -DbranchName=dev -Dresume=false'
                         sh 'git checkout dev'
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
