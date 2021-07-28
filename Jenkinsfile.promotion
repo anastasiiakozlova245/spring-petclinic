@@ -28,13 +28,15 @@ pipeline{
                 ]) {
                     echo "building a jar file ${release_version}"
                     script {
+                        sh 'rm release.properties'
+                        sh 'rm pom.xml.releaseBackup'
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
                         sh 'git pull'
                         sh 'mvn -B release:prepare -DbranchName=dev -Dresume=false'
                         sh 'git checkout dev'
-                        sh 'mvn -s $MAVEN_SETTINGS release:perform'
+                        sh 'mvn release:perform'
                     }
                 }
             }
