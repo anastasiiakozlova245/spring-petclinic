@@ -274,6 +274,7 @@
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
           <forkedProcessExitTimeoutInSeconds>60</forkedProcessExitTimeoutInSeconds>
+          <forkCount>1</forkCount>
         </configuration>
       </plugin>
     </plugins>
