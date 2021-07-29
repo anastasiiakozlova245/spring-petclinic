@@ -407,9 +407,6 @@
               <version>3.0.0-M4</version>
               <configuration>
                 <tag>dev</tag>
-                <checkModificationExcludes>
-                  <checkModificationExclude>**/pom.xml.tag</checkModificationExclude>
-                </checkModificationExcludes>
               </configuration>
             </plugin>
           </plugins>
