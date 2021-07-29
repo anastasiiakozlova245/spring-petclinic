@@ -27,8 +27,8 @@ pipeline{
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo "building a jar file ${env.release_version}"
-                    rv=${env.release_version}
                     script {
+                        rv=${env.release_version}
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
