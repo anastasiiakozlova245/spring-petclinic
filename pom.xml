@@ -408,7 +408,7 @@
               <configuration>
                 <tag>dev</tag>
                 <checkModificationExcludes>
-                  <checkModificationExclude>pom.xml</checkModificationExclude>
+                  <checkModificationExclude>**/pom.xml.tag</checkModificationExclude>
                 </checkModificationExcludes>
               </configuration>
             </plugin>
