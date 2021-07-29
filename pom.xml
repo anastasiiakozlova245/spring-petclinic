@@ -278,7 +278,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
-          <forkedProcessExitTimeoutInSeconds>60</forkedProcessExitTimeoutInSeconds>
+          <forkedProcessExitTimeoutInSeconds>3000</forkedProcessExitTimeoutInSeconds>
           <forkCount>1</forkCount>
         </configuration>
       </plugin>
