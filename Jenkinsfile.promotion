@@ -33,7 +33,7 @@ pipeline{
                         sh 'git checkout dev'
                         sh 'git pull'
                         sh 'mvn release:clean'
-                        sh 'mvn -s $MAVEN_SETTINGS -B release:prepare -Dresume=false'
+                        sh 'mvn -s $MAVEN_SETTINGS -B release:prepare-with-pom -Dresume=false'
                         sh 'git checkout dev'
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
