@@ -11,7 +11,7 @@ pipeline{
         NEXUS_REPOSITORY = "petclinic-releases"
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
         pom = ''
-        release_version = ''
+        rv = ''
     }
     stages {
         stage("release") {
@@ -27,6 +27,7 @@ pipeline{
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo "building a jar file ${env.release_version}"
+                    rv=${env.release_version}
                     script {
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
@@ -42,9 +43,9 @@ pipeline{
         }
         stage("pull from nexus") {
             steps {
-                echo "building the jar file spring-petclinic-${env.release_version}"
+                echo "building the jar file spring-petclinic-${release_version}"
                 script {
-                    sh 'curl -o petclinic.jar -L -X GET "http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${env.release_version}&maven.extension=jar" '
+                    sh 'curl -o petclinic.jar -L -X GET "http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${rv}&maven.extension=jar" '
 
                 }
             }
