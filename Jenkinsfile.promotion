@@ -42,9 +42,9 @@ pipeline{
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
                 }
+                */
             }
         }
-*/
         stage("pull from nexus") {
             steps {
                 echo "building the jar file spring-petclinic-$env.rv"
