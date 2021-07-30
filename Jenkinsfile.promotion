@@ -24,7 +24,7 @@ pipeline{
             steps{
                 echo "performing the release ${release_version}"
                 script {
-                    rv=${release_version}
+                    rv = "${release_version}"
                     echo rv
                 }
 /*                withCredentials([
