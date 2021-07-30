@@ -25,6 +25,7 @@ pipeline{
                 echo "performing the release ${release_version}"
                 script {
                     rv=params.release_version
+                    echo rv
                 }
 /*                withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
