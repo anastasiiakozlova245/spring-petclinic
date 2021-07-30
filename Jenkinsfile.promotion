@@ -23,7 +23,6 @@ pipeline{
                 script {
                     rv = "${release_version}"
                     echo rv
-                    sh 'mvn versions:set -DnewVersion=${release_version}-SNAPSHOT'
                 }
                 withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
@@ -34,6 +33,7 @@ pipeline{
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
                         sh 'git pull'
+                        sh 'mvn -s $MAVEN_SETTINGS versions:set -DnewVersion=${release_version}-SNAPSHOT'
 /*                        sh 'git tag -d "spring-petclinic-${release_version}"' */
                         sh 'mvn release:clean'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare -Dresume=false'
