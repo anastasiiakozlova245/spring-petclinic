@@ -35,6 +35,7 @@ pipeline{
                         sh 'git pull'
                         sh 'mvn -s $MAVEN_SETTINGS versions:set -DnewVersion=${release_version}-SNAPSHOT'
 /*                        sh 'git tag -d "spring-petclinic-${release_version}"' */
+                        sh 'git push'
                         sh 'mvn release:clean'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare -Dresume=false'
                         sh 'git checkout dev'
