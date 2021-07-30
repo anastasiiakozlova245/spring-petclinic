@@ -34,8 +34,7 @@ pipeline{
                         sh 'git checkout dev'
                         sh 'git pull'
                         sh 'gitTagExists=$(git tag -l "spring-petclinic-${release_version}")'
-                        sh 'if [ -n "$gitTagExists" ]\
-                            then\
+                        sh 'if [ -n "$gitTagExists" ] then\
                                 git tag -d "spring-petclinic-${release_version}"\
                             fi'
                         sh 'mvn release:clean'
