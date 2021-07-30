@@ -24,7 +24,7 @@ pipeline{
             steps{
                 echo "performing the release ${release_version}"
                 script {
-                    rv=$params.release_version
+                    rv=params.release_version
                 }
 /*                withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
@@ -47,7 +47,7 @@ pipeline{
         }
         stage("pull from nexus") {
             steps {
-                echo "building the jar file spring-petclinic-$env.rv"
+                echo "building the jar file spring-petclinic-${env.rv}"
                 script {
                     sh 'curl -o petclinic.jar -L -X GET "http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${env.rv}&maven.extension=jar" '
 
