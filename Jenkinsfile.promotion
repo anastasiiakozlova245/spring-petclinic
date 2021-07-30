@@ -23,12 +23,14 @@ pipeline{
             }
             steps{
                 echo "performing the release ${release_version}"
-                withCredentials([
+                script {
+                    rv=$params.release_version
+                }
+/*                withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo "building a jar file ${env.release_version}"
                     script {
-                        rv="${env.release_version}"
                         sh 'git config --global user.email "anastasiia.kozlova245@gmail.com"'
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
@@ -42,11 +44,12 @@ pipeline{
                 }
             }
         }
+*/
         stage("pull from nexus") {
             steps {
-                echo "building the jar file spring-petclinic-${release_version}"
+                echo "building the jar file spring-petclinic-$env.rv"
                 script {
-                    sh 'curl -o petclinic.jar -L -X GET "http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${rv}&maven.extension=jar" '
+                    sh 'curl -o petclinic.jar -L -X GET "http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${env.rv}&maven.extension=jar" '
 
                 }
             }
