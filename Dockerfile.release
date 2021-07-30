@@ -1,0 +1,6 @@
+FROM maven:3.8.1-jdk-8
+WORKDIR /home/app
+COPY ./petclinic.jar /home/app/
+EXPOSE 8080
+USER root
+CMD java -jar petclinic.jar

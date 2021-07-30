@@ -5,13 +5,10 @@ pipeline{
         jdk 'jdk8'
     }
     environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "nexus-CP:8081"
-        NEXUS_REPOSITORY = "petclinic-releases"
-        NEXUS_CREDENTIAL_ID = "nexus-credentials"
-        pom = ''
         rv = ''
+        dockerImage = ''
+        credentialsID = 'docker-credentials'
+        registry = 'anastasiiakozlova/petclinic-release'
     }
     stages {
         stage("release") {
@@ -55,14 +52,31 @@ pipeline{
                 }
             }
         }
-        stage("run the application") {
+        stage("build a docker image") {
             steps {
-                echo 'running the application'
+                echo 'building a docker image'
                 script {
+                    dockerImage = docker.build("anastasiiakozlova/petclinic-release:${rv}" -f Dockerfile.release .)
+                }
+            }
+        }
+        stage("push to docker registry") {
+            steps {
+                script {
+                    docker.withRegistry('', credentialsID) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage("run petclinic") {
+            steps {
+                script {
+                    echo "Running ${rv} version of spring-petclinic"
                     sh 'docker rm -f petclinic'
-                    docker.image('maven:3.8.1-openjdk-8').run(["--network jenkins -p 8082:8080 -v /Users/akozlova/intro_to_devops/jenkins/data-cp/workspace/Promotion-Petclinic:/opt -w /opt",
-                        'java -jar *.jar'
-                    ])
+                    docker.withRegistry('', credentialsID) {
+                        docker.image("anastasiiakozlova/petclinic-release:${rv}").run(['--name petclinic --network jenkins -p 80:8080'])
+                    }
                 }
             }
         }
