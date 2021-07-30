@@ -15,7 +15,7 @@ pipeline{
             input {
                 message 'Please provide the release version'
                 parameters {
-                    string(defaultValue: '3.0.5', description: '', name: 'release_version', trim: true)
+                    string(defaultValue: '3.0.6', description: '', name: 'release_version', trim: true)
                 }
             }
             steps{
@@ -24,7 +24,7 @@ pipeline{
                     rv = "${release_version}"
                     echo rv
                 }
-/*                withCredentials([
+                withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
                 ]) {
                     echo "building a jar file ${env.release_version}"
@@ -40,7 +40,6 @@ pipeline{
                         sh 'mvn -s $MAVEN_SETTINGS release:perform'
                     }
                 }
-                */
             }
         }
         stage("pull from nexus") {
