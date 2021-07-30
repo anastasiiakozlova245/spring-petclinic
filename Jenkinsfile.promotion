@@ -15,7 +15,7 @@ pipeline{
             input {
                 message 'Please provide the release version'
                 parameters {
-                    string(defaultValue: '3.0.6', description: '', name: 'release_version', trim: true)
+                    string(defaultValue: '3.0.7', description: '', name: 'release_version', trim: true)
                 }
             }
             steps{
@@ -23,6 +23,7 @@ pipeline{
                 script {
                     rv = "${release_version}"
                     echo rv
+                    sh 'mvn versions:set -DnewVersion=${release_version}-SNAPSHOT'
                 }
                 withCredentials([
                     file(credentialsId: 'maven-proxy', variable: 'MAVEN_SETTINGS')
