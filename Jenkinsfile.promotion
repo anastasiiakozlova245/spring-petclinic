@@ -33,6 +33,7 @@ pipeline{
                         sh 'git config --global user.name "anastasiiakozlova245"'
                         sh 'git checkout dev'
                         sh 'git pull'
+                        sh 'git tag -d "spring-petclinic-3.0.5"'
                         sh 'mvn release:clean'
                         sh 'mvn -s $MAVEN_SETTINGS -B release:prepare -Dresume=false'
                         sh 'git checkout dev'
