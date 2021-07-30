@@ -56,7 +56,7 @@ pipeline{
             steps {
                 echo 'building a docker image'
                 script {
-                    dockerImage = docker.build("anastasiiakozlova/petclinic-release:${rv}", [ -f Dockerfile.release .])
+                    dockerImage = docker.build("anastasiiakozlova/petclinic-release:${rv}", [' -f Dockerfile.release .'])
                 }
             }
         }
