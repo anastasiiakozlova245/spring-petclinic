@@ -36,9 +36,9 @@ pipeline{
                         sh 'mvn -s $MAVEN_SETTINGS versions:set -DnewVersion=${release_version}-SNAPSHOT'
 /*                        sh 'git tag -d "spring-petclinic-${release_version}"' */
                     }
-                    withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'gitCredentials')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         script {
-                            sh 'git push'
+                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/anastasiiakozlova245/spring-petclinic.git''
                         }
                     }
                     script {
