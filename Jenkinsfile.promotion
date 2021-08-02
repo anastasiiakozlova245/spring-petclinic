@@ -40,7 +40,7 @@ pipeline{
                         script {
                             sh 'git add -A'
                             sh 'git commit -m "set new project version"'
-                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/anastasiiakozlova245/spring-petclinic.git -b dev'
+                            sh 'git push -b dev https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/anastasiiakozlova245/spring-petclinic.git'
                         }
                     }
                     script {
