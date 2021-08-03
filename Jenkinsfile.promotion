@@ -15,7 +15,7 @@ pipeline{
             input {
                 message 'Please provide the release version'
                 parameters {
-                    string(defaultValue: '3.0.7', description: '', name: 'release_version', trim: true)
+                    string(defaultValue: '3.0.8', description: '', name: 'release_version', trim: true)
                 }
             }
             steps{
@@ -54,7 +54,7 @@ pipeline{
         }
         stage("pull from nexus") {
             steps {
-                echo "building the jar file spring-petclinic-${rv}"
+                echo "uploading the jar file spring-petclinic-${rv}"
                 script {
                     sh "curl -o petclinic.jar -L -X GET 'http://nexus-CP:8081/service/rest/v1/search/assets/download?sort=version&repository=petclinic-releases&maven.groupId=org.springframework.samples&maven.artifactId=spring-petclinic&maven.baseVersion=${rv}&maven.extension=jar&maven.classifier' "
 
